@@ -1,0 +1,22 @@
+.card {
+  transition: transform 0.2s ease;
+  border-left: 4px solid #ff6600;
+  
+  &:hover {
+    transform: translateX(5px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+}
+
+.badge {
+  background-color: #ff6600 !important;
+  min-width: 30px;
+}
+
+a {
+  color: #2c3e50;
+  
+  &:hover {
+    color: #ff6600;
+  }
+}

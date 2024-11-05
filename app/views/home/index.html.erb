@@ -1,0 +1,48 @@
+<div class="container mt-4">
+  <h1 class="mb-4">Hacker News - Top 15 Histórias</h1>
+
+  <% if @stories.nil? %>
+    <div class="text-center py-5">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Carregando...</span>
+      </div>
+      <p class="mt-3">Carregando histórias...</p>
+    </div>
+  <% elsif @stories.empty? %>
+    <div class="alert alert-info">
+      Nenhuma história encontrada.
+    </div>
+  <% else %>
+    <div class="row">
+      <% @stories.each_with_index do |story, index| %>
+        <div class="col-12 mb-3">
+          <div class="card">
+            <div class="card-body">
+              <div class="d-flex align-items-center">
+                <span class="badge bg-primary me-3"><%= index + 1 %></span>
+                <h5 class="card-title mb-0">
+                  <%= link_to story['title'], story['url'], target: '_blank', class: 'text-decoration-none' %>
+                </h5>
+              </div>
+              
+              <div class="card-text mt-2 text-muted">
+                <small>
+                  <i class="fas fa-arrow-up"></i> <%= story['score'] %> pontos 
+                  | por <%= story['by'] %>
+                  | <%= time_ago_in_words(Time.at(story['time']), locale: :'pt-BR') %> atrás
+                  | <%= link_to pluralize(story['descendants'].to_i, 'comentário'), 
+                      story_comments_path(story['id']), 
+                      class: 'text-muted text-decoration-none' %>
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="text-center mt-4">
+    <%= link_to 'Atualizar histórias', root_path, class: 'btn btn-primary' %>
+  </div>
+</div> 

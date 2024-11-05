@@ -1,0 +1,23 @@
+<div class="comment-thread">
+  <div class="comment-container">
+    <div class="comment-content">
+      <div class="comment-meta">
+        <span class="author">@<%= comment['by'] %></span>
+        <span class="dot">•</span>
+        <span class="time"><%= time_ago_in_words(Time.at(comment['time']), locale: :'pt-BR') %> atrás</span>
+      </div>
+      
+      <div class="comment-text">
+        <%= sanitize comment['text'] %>
+      </div>
+    </div>
+
+    <% if comment['replies']&.any? %>
+      <div class="replies">
+        <% comment['replies'].each do |reply| %>
+          <%= render partial: 'comment', locals: { comment: reply } %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div> 

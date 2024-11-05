@@ -1,0 +1,31 @@
+<div class="container mt-4">
+  <div class="card mb-4">
+    <div class="card-body">
+      <h4 class="card-title">
+        <%= link_to @story['title'], @story['url'], target: '_blank', class: 'text-decoration-none' %>
+      </h4>
+      <p class="text-muted">
+        <%= @story['score'] %> pontos 
+        | por <%= @story['by'] %> 
+        | <%= time_ago_in_words(Time.at(@story['time']), locale: :'pt-BR') %> atrás
+        | <%= pluralize(@story['descendants'].to_i, 'comentário') %>
+      </p>
+    </div>
+  </div>
+
+  <div class="comments-section">
+    <% if @comments&.any? %>
+      <% @comments.each do |comment| %>
+        <%= render partial: 'comment', locals: { comment: comment, level: 0 } %>
+      <% end %>
+    <% else %>
+      <div class="alert alert-info">
+        Nenhum comentário encontrado.
+      </div>
+    <% end %>
+  </div>
+
+  <div class="mt-4">
+    <%= link_to 'Voltar', root_path, class: 'btn btn-secondary' %>
+  </div>
+</div>
