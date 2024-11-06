@@ -47,9 +47,11 @@ jobs:
         with:
           ruby-version: .ruby-version
           bundler-cache: true
+          working-directory: ruby-lsp
 
       - name: Lint code for consistent style
-        run: bin/rubocop -f github
+        working-directory: ruby-lsp
+        run: bundle exec rubocop -f github
 
   test:
     runs-on: ubuntu-latest
