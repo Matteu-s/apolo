@@ -51,9 +51,13 @@ jobs:
       - name: Set up Ruby (Rubocop)
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version-file: ruby-lsp/.ruby-version
+          ruby-version: ruby-lsp/.ruby-version
           working-directory: ruby-lsp
           bundler-cache: true
+
+      - name: Add Linux platform to Rubocop's Gemfile.lock
+        working-directory: ruby-lsp
+        run: bundle lock --add-platform x86_64-linux
 
       - name: Lint code for consistent style
         run: bundle exec --gemfile=ruby-lsp/Gemfile rubocop -f github
