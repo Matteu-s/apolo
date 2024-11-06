@@ -51,7 +51,7 @@ jobs:
       - name: Set up Ruby (Rubocop)
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: ruby-lsp/.ruby-version
+          ruby-version: '3.1.6'
           working-directory: ruby-lsp
           bundler-cache: true
 
