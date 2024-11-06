@@ -42,16 +42,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Ruby
+      - name: Set up Ruby (Main)
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: .ruby-version
           bundler-cache: true
 
-      - name: Install Rubocop dependencies
-        run: |
-          cd ruby-lsp
-          bundle install
+      - name: Set up Ruby (Rubocop)
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version-file: ruby-lsp/.ruby-version
+          working-directory: ruby-lsp
+          bundler-cache: true
 
       - name: Lint code for consistent style
         run: bundle exec --gemfile=ruby-lsp/Gemfile rubocop -f github
