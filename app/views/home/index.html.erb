@@ -5,11 +5,9 @@
         <%= text_field_tag :q, params[:q], 
             class: "form-control",
             placeholder: "Buscar histórias..." %>
-        <%= button_tag type: 'submit',
+        <%= submit_tag "Buscar", 
             class: "btn btn-primary",
-            onclick: "this.innerHTML = '<i class=\"fas fa-spinner fa-spin me-2\"></i>Buscando...'; this.classList.add('disabled');" do %>
-          Buscar
-        <% end %>
+            onclick: "this.innerHTML = '<i class=\"fas fa-spinner fa-spin me-2\"></i>Buscando...'; this.classList.add('disabled');" %>
       </div>
     <% end %>
   </div>
