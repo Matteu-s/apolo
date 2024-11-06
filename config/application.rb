@@ -16,6 +16,7 @@ Bundler.require(*Rails.groups)
 
 module Apolo
   class Application < Rails::Application
+    config.hosts << 'apolo-1wro.onrender.com'
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.2
 
