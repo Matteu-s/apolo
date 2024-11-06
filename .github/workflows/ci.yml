@@ -47,11 +47,14 @@ jobs:
         with:
           ruby-version: .ruby-version
           bundler-cache: true
-          working-directory: ruby-lsp
+
+      - name: Install Rubocop dependencies
+        run: |
+          cd ruby-lsp
+          bundle install
 
       - name: Lint code for consistent style
-        working-directory: ruby-lsp
-        run: bundle exec rubocop -f github
+        run: bundle exec --gemfile=ruby-lsp/Gemfile rubocop -f github
 
   test:
     runs-on: ubuntu-latest
