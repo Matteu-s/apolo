@@ -22,7 +22,7 @@ GEM
     drb (2.2.1)
     i18n (1.14.6)
       concurrent-ruby (~> 1.0)
-    json (2.7.6)
+    json (2.8.1)
     language_server-protocol (3.17.0.3)
     logger (1.6.1)
     minitest (5.25.1)
@@ -61,14 +61,13 @@ GEM
       sorbet-runtime (>= 0.5.10782)
     ruby-progressbar (1.13.0)
     securerandom (0.3.1)
-    sorbet-runtime (0.5.11635)
+    sorbet-runtime (0.5.11637)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.6.0)
 
 PLATFORMS
-  x86_64-darwin-23
-  x86_64-linux
+  x86_64-darwin-24
 
 DEPENDENCIES
   rubocop
@@ -76,7 +75,7 @@ DEPENDENCIES
   ruby-lsp
 
 RUBY VERSION
-   ruby 3.1.4p223
+   ruby 3.1.6p260
 
 BUNDLED WITH
-   2.3.26
+   2.3.27
