@@ -1,3 +1,6 @@
+require 'json'
+require 'net/http'
+
 module HackerNews
   class BaseClient
     private

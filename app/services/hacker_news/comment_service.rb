@@ -14,7 +14,7 @@ module HackerNews
 
     def fetch_comment_with_replies(comment_id, depth)
       comment = make_request("#{api_url}/item/#{comment_id}.json")
-      return if comment.nil? || comment['deleted']
+      return if comment.nil? || comment['deleted'] || comment['text']&.split(/\s+/)&.count.to_i <= 20
 
       if comment['kids'].present?
         replies = fetch_comments(comment['kids'], depth + 1)
