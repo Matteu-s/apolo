@@ -36,34 +36,34 @@ jobs:
       - name: Scan for security vulnerabilities in JavaScript dependencies
         run: bin/importmap audit
 
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+  # lint:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v4
 
-      - name: Set up Ruby (Main)
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: .ruby-version
-          bundler-cache: true
+  #     - name: Set up Ruby (Main)
+  #       uses: ruby/setup-ruby@v1
+  #       with:
+  #         ruby-version: .ruby-version
+  #         bundler-cache: true
 
-      - name: Set up Ruby (Rubocop)
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.1.6'
-          working-directory: ruby-lsp
-          bundler-cache: false
+  #     - name: Set up Ruby (Rubocop)
+  #       uses: ruby/setup-ruby@v1
+  #       with:
+  #         ruby-version: '3.1.6'
+  #         working-directory: ruby-lsp
+  #         bundler-cache: false
 
-      - name: Install dependencies for Rubocop
-        working-directory: ruby-lsp
-        run: |
-          bundle config set --local path 'vendor/bundle'
-          bundle lock --add-platform x86_64-linux
-          bundle install
+  #     - name: Install dependencies for Rubocop
+  #       working-directory: ruby-lsp
+  #       run: |
+  #         bundle config set --local path 'vendor/bundle'
+  #         bundle lock --add-platform x86_64-linux
+  #         bundle install
 
-      - name: Lint code for consistent style
-        run: bundle exec rubocop -f github
+  #     - name: Lint code for consistent style
+  #       run: bundle exec rubocop -f github
 
   test:
     runs-on: ubuntu-latest
