@@ -1,6 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe HomeController, type: :controller do
+  let(:story_service) { instance_double(HackerNews::StoryService) }
+  let(:comment_service) { instance_double(HackerNews::CommentService) }
+
+  before do
+    allow(HackerNews::StoryService).to receive(:new).and_return(story_service)
+    allow(HackerNews::CommentService).to receive(:new).and_return(comment_service)
+  end
+
   describe 'GET #index' do
     let(:stories) do
       [
@@ -11,8 +19,8 @@ RSpec.describe HomeController, type: :controller do
 
     context 'sem parâmetro de busca' do
       before do
-        allow(HackerNewsService).to receive(:fetch_top_stories).and_return([1, 2])
-        allow(HackerNewsService).to receive(:fetch_story_details).and_return(stories)
+        allow(story_service).to receive(:fetch_top_stories).and_return([1, 2])
+        allow(story_service).to receive(:fetch_story_details).and_return(stories)
         allow(Rails.cache).to receive(:fetch).with('top_stories', expires_in: 5.minutes).and_yield
       end
 
@@ -35,7 +43,7 @@ RSpec.describe HomeController, type: :controller do
       end
 
       before do
-        allow(HackerNewsService).to receive(:search_stories).with(query).and_return(search_results)
+        allow(story_service).to receive(:search_stories).with(query).and_return(search_results)
         allow(Rails.cache).to receive(:fetch).with("search_stories_#{query}", expires_in: 1.minute).and_yield
       end
 
@@ -70,8 +78,8 @@ RSpec.describe HomeController, type: :controller do
     end
 
     before do
-      allow(HackerNewsService).to receive(:fetch_story_details).with(story_id).and_return(story)
-      allow(HackerNewsService).to receive(:fetch_comments).with(story['kids']).and_return(comments)
+      allow(story_service).to receive(:fetch_story_details).with(story_id).and_return(story)
+      allow(comment_service).to receive(:fetch_comments).with(story['kids']).and_return(comments)
       allow(Rails.cache).to receive(:fetch).with("comments_#{story_id}", expires_in: 5.minutes).and_yield
     end
 
@@ -97,7 +105,7 @@ RSpec.describe HomeController, type: :controller do
       end
 
       before do
-        allow(HackerNewsService).to receive(:fetch_story_details)
+        allow(story_service).to receive(:fetch_story_details)
           .with('2')
           .and_return(story_without_comments)
 
