@@ -2,6 +2,7 @@ class HomeController < ApplicationController
   CACHE_EXPIRY = 5.minutes
 
   def index
+    Rails.cache.delete('top_stories') if params[:refresh].present?
     @stories = if params[:q].blank?
                  Rails.cache.fetch('top_stories', expires_in: CACHE_EXPIRY) do
                    story_service = HackerNews::StoryService.new

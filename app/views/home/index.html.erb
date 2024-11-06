@@ -1,13 +1,15 @@
 <div class="container mt-4">
-  <h1 class="mb-4">Hacker News</h1>
-
   <div class="search-form">
     <%= form_tag root_path, method: :get, class: 'mb-4' do %>
       <div class="input-group">
         <%= text_field_tag :q, params[:q], 
             class: "form-control",
             placeholder: "Buscar histórias..." %>
-        <%= submit_tag "Buscar", class: "btn btn-primary" %>
+        <%= button_tag type: 'submit',
+            class: "btn btn-primary",
+            onclick: "this.innerHTML = '<i class=\"fas fa-spinner fa-spin me-2\"></i>Buscando...'; this.classList.add('disabled');" do %>
+          Buscar
+        <% end %>
       </div>
     <% end %>
   </div>
@@ -56,6 +58,10 @@
   <% end %>
 
   <div class="text-center mt-4">
-    <%= link_to 'Atualizar histórias', root_path, class: 'btn btn-primary' %>
+    <%= link_to root_path(refresh: Time.current.to_i), 
+        class: 'btn btn-primary',
+        onclick: "this.innerHTML = '<i class=\"fas fa-spinner fa-spin me-2\"></i>Atualizando...'; this.classList.add('disabled');" do %>
+      Atualizar histórias
+    <% end %>
   </div>
 </div> 

@@ -1,7 +1,7 @@
 module HackerNews
   class StoryService < BaseClient
     STORIES_LIMIT = 15
-    NEW_STORIES_LIMIT = 500
+    NEW_STORIES_LIMIT = 200
 
     def fetch_story_details(story_ids)
       return [] if story_ids.nil?
