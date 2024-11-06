@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: apolo
+    env: ruby
+    buildCommand: docker build -f Dockerfile.prod -t app .
+    startCommand: docker run -p $PORT:3000 app
+    envVars:
+      - key: RAILS_MASTER_KEY
+        sync: false 
