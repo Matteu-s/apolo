@@ -1,5 +1,16 @@
 <div class="container mt-4">
-  <h1 class="mb-4">Hacker News - Top 15 Histórias</h1>
+  <h1 class="mb-4">Hacker News</h1>
+
+  <div class="search-form">
+    <%= form_tag root_path, method: :get, class: 'mb-4' do %>
+      <div class="input-group">
+        <%= text_field_tag :q, params[:q], 
+            class: "form-control",
+            placeholder: "Buscar histórias..." %>
+        <%= submit_tag "Buscar", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
 
   <% if @stories.nil? %>
     <div class="text-center py-5">
@@ -30,9 +41,11 @@
                   <i class="fas fa-arrow-up"></i> <%= story['score'] %> pontos 
                   | por <%= story['by'] %>
                   | <%= time_ago_in_words(Time.at(story['time']), locale: :'pt-BR') %> atrás
-                  | <%= link_to pluralize(story['descendants'].to_i, 'comentário'), 
-                      story_comments_path(story['id']), 
-                      class: 'text-muted text-decoration-none' %>
+                  | <%= link_to story_comments_path(story['id']), 
+                      class: 'text-muted text-decoration-none hover-effect' do %>
+                    <i class="fas fa-comments"></i>
+                    <%= pluralize(story['descendants'].to_i, 'comentário') %>
+                  <% end %>
                 </small>
               </div>
             </div>

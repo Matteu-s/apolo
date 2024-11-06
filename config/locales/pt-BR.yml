@@ -7,6 +7,9 @@ pt-BR:
       about_x_hours:
         one: "aproximadamente 1 hora"
         other: "aproximadamente %{count} horas"
+      x_days:
+        one: "1 dia"
+        other: "%{count} dias"
       about_x_months:
         one: "aproximadamente 1 mês"
         other: "aproximadamente %{count} meses"
