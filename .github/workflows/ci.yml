@@ -66,8 +66,8 @@ jobs:
           ruby-version: .ruby-version
           bundler-cache: true
 
-      - name: Run tests
-        run: bin/rails test test:system
+      - name: Run RSpec tests
+        run: bundle exec rspec
         env:
           RAILS_ENV: test
 
